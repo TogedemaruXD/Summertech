@@ -14,7 +14,9 @@ public class input {
 		System.out.println("Type something fun about yourself!");
 		String funFact = input.nextLine();
 		
-		System.out.println(name + " " + age + " " + funFact);
+		System.out.println("My name is " + name + ". I am  " + age + ". A fun fact about me is that " + funFact +". ");
+		
+		input.close();
 	}
 
 }
