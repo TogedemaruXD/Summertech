@@ -1,15 +1,17 @@
 import java.util.Scanner;
 public class Battleship {
-
+	public static String [] [] board = new String [10][10];
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String [] [] board = new String [10][10];
+
 		for(int i = 0; i < 10; i++){
 			for(int j = 0; j < 10; j++) {
 				board[i][j] = "* ";
 			}
 		}
 		boardPrint(board);
+		shipPlacing();
+
 	}
 
 	public static void boardPrint(String [][] board) {
@@ -22,11 +24,12 @@ public class Battleship {
 	}
 	public static void shipPlacing() {
 		Scanner input = new Scanner(System.in);
-		System.out.println("Which ship would you like to place? (5,4,3c,3s,2)");
-		String placenum = input.next();
+
 		boolean x = false;
 
-		while(x != false) {
+		while(x != true) {
+			System.out.println("Which ship would you like to place? (5,4,3c,3s,2)");
+			String placenum = input.next();
 			if(placenum.equals("5")) {
 				System.out.println("Please pick your first X point");
 				int x1 = input.nextInt()-1;
@@ -45,30 +48,43 @@ public class Battleship {
 						}
 					}
 					else if(y2 - y1 > y1 - y2) {
-						for(int i = 0; i < 5; i++) {
-							boardPrint(board[x1][y2 + i] = "+");
+						for(int i = 0; i < 5; i--) {
+							board[x1][y2 + i] = "+";
 						}
 					}
 				}
 				else if(y1 - y2 == 0 || y2 - y1 == 0) {
-					if(x1 -)
-					
-					
+					if(x1 - x2 > x2 - x1) {
+						for(int i = 0; i < 5; i++) {
+							board[x1 + i][y1] = "+";
+						}
+					}
+					else if(x2 - x1 > x1 - x2) {
+						for(int i = 0; i < 5; i--) {
+							board[x2 + i][y1] = "+";
+						}
+					}
+
+
+				}
+				else {
+					System.out.println("please try again");
+				}
+				boardPrint(board);
 			}
 		}
+
+
+		//point selection
+		/*System.out.println("Please pick your first X point");
+		int x1 = input.nextInt();
+		System.out.println("Please pick your first Y point");
+		int y1 = input.nextInt();
+
+		System.out.println("Please pick your second X point");
+		int x2 = input.nextInt();
+		System.out.println("Please pick your second Y point");
+		int y2 = input.nextInt(); */
 	}
-
-
-	//point selection
-	System.out.println("Please pick your first X point");
-	int x1 = input.nextInt();
-	System.out.println("Please pick your first Y point");
-	int y1 = input.nextInt();
-
-	System.out.println("Please pick your second X point");
-	int x2 = input.nextInt();
-	System.out.println("Please pick your second Y point");
-	int y2 = input.nextInt();
-}
 }
 
