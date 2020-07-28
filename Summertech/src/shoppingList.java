@@ -62,6 +62,7 @@ public class shoppingList {
 		}
 		
 	}
+	input.close();
 
 
 }

@@ -10,14 +10,12 @@ public class ticTacToe {
 		int userrow;
 		int usercol;
 		String player = "x";
-		while(true){
+		boolean x = false;
+		while(x != true){
 			//board printing
-			for(int i = 0; i < 3; i++) {
-				for(int j = 0; j < 3; j++) {
-					System.out.print(board[i][j] + " ");
-				}
-				System.out.println();
-			} 
+			boardPrint(board);
+			
+
 
 			System.out.println("Which row?");
 			userrow = input.nextInt() - 1;
@@ -39,6 +37,7 @@ public class ticTacToe {
 				System.out.println("spot is already filled, please try again");
 				continue;
 			}
+
 			int count = 0;
 			for(int i = 0; i < 3; i++){
 				for(int j = 0; j < 3; j++) {
@@ -50,7 +49,7 @@ public class ticTacToe {
 
 			if(count == 0) {
 				System.out.println("Tie. Game Over");
-				break;
+				x = true;
 			}
 
 			//horizontal wins
@@ -64,6 +63,7 @@ public class ticTacToe {
 				}
 				if(count2 == 3) {
 					System.out.println("player " + player + " wins!");
+					x = true;
 				}
 			}
 
@@ -78,7 +78,7 @@ public class ticTacToe {
 				}
 				if(count2 == 3){
 					System.out.println("player " + player + " wins!");
-					break;
+					x = true;
 				}
 			}
 
@@ -90,7 +90,7 @@ public class ticTacToe {
 				}
 				if(count2 == 3){
 					System.out.println("player " + player + " wins!");
-					break;
+					x = true;
 				}
 			}
 
@@ -101,6 +101,18 @@ public class ticTacToe {
 			else {
 				player = "x";
 			}
+		}
+	}
+
+	public static void boardPrint(String [][] board) {
+
+		//prints board in function
+		for(int i = 0; i < 3; i++) {
+			for(int j = 0; j < 3; j++) {
+				System.out.print(board[i][j] + " ");
+			}
+			System.out.println();
+
 		}
 	}
 }
