@@ -1,19 +1,27 @@
 import java.util.Scanner;
 public class Battleship {
-	public static String [] [] board = new String [10][10];
+	
+	public static String [] [] p1 = new String [10][10];
+	public static String [] [] p2 = new String [10][10];
+	public static String [] [] p1a = new String [10][10];
+	public static String [] [] p2a= new String [10][10];
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
+		boardCreate(p1);
+		boardCreate(p2);
+		boardPrint(p1);
+		shipPlacing(p1);
+		boardPrint(p2);
+		shipPlacing(p2);
+	}
+	public static void boardCreate(String [][] board) {
 		for(int i = 0; i < 10; i++){
 			for(int j = 0; j < 10; j++) {
 				board[i][j] = "* ";
 			}
 		}
-		boardPrint(board);
-		shipPlacing();
-
 	}
-
 	public static void boardPrint(String [][] board) {
 		for(int i = 0; i < 10; i++){
 			for(int j = 0; j < 10; j++){
@@ -22,7 +30,7 @@ public class Battleship {
 			System.out.println();
 		}
 	}
-	public static void shipPlacing() {
+	public static void shipPlacing(String [][] board) {
 		Scanner input = new Scanner(System.in);
 
 		boolean x = false;
@@ -260,7 +268,15 @@ public class Battleship {
 		
 		}
 	}
-
+	public static void shipdestroy(String [][] board) {
+		Scanner input = new Scanner(System.in);
+		System.out.println("Choose a location to destroy");
+		System.out.println("Select your X point");
+		int destroyX = input.nextInt()-1;
+		System.out.println("Select your Y point");
+		int destroyY = input.nextInt()-1;
+		if(board)
+	}
 
 	//point selection
 	/*System.out.println("Please pick your first X point");
