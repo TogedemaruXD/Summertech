@@ -30,242 +30,85 @@ public class Battleship {
 			System.out.println();
 		}
 	}
+	public static String[] placeShip(String placenum, Scanner input, String[][] board) {
+		String[] ships = {"5", "4", "3c", "3s", "2"};
+		int index = 0;
+		for(String ship: ships) {
+			if(placenum != "" && placenum.equals(ship)) {
+				System.out.println("Please pick your first X point");
+				int x1 = input.nextInt()-1;
+				System.out.println("Please pick your first Y point");
+				int y1 = input.nextInt()-1;
+		
+				System.out.println("Please pick your second X point");
+				int x2 = input.nextInt()-1;
+				System.out.println("Please pick your second Y point");
+				int y2 = input.nextInt()-1;
+		
+				if(x1 - x2 == 0 || x2 - x1 == 0 ) {
+					if(y1 - y2 > y2 - y1) {
+						for(int i = 0; i < 5; i++) {
+							board[y2 + i][x1] = "+ ";
+						}
+					}
+					else if(y2 - y1 > y1 - y2) {
+						for(int i = 4; i >= 0; i--) {
+							board[y1 + i][x1] = "+ ";
+						}
+					}
+				}
+				else if(y1 - y2 == 0 || y2 - y1 == 0) {
+					if(x1 - x2 > x2 - x1) {
+						for(int i = 0; i < 5; i++) {
+							board[y1][x2 + i] = "+ ";
+						}
+					}
+					else if(x2 - x1 > x1 - x2) {
+						for(int i = 4; i >= 0; i--) {
+							board[y1][x1 + i] = "+ ";
+						}
+					}
+				}
+				else {
+					System.out.println("please try again");
+				}
+				boardPrint(board);
+				ships[index] = "";
+				System.out.println("Ship " + ships[index] + " has been placed.");
+			}
+			index ++;
+		}
+		return ships;
+	}
 	public static void shipPlacing(String [][] board) {
 		Scanner input = new Scanner(System.in);
-
 		boolean x = false;
-		boolean lockShip5 = false;
-		boolean lockShip4 = false;
-		boolean lockShip3c = false;
-		boolean lockShip3s = false;
-		boolean lockShip2 = false;
-		
+		String[] ships = {"5", "4", "3c", "3s", "2"};
 		while(x != true) {
-			System.out.println("Which ship would you like to place? (5,4,3c,3s,2)");
+			System.out.print("Which ship would you like to place? (");
+			for(String ship: ships) {
+				if (ship.equals("")) {
+					continue;
+				}  
+				if(ship.equals("2")) {
+					System.out.print(ship);
+					break;
+				}
+				System.out.print(ship + ", ");
+			}
+			System.out.print(")");
 			String placenum = input.next();
-
-			if(placenum.equals("5") && lockShip5 == false) {
-				System.out.println("Please pick your first X point");
-				int x1 = input.nextInt()-1;
-				System.out.println("Please pick your first Y point");
-				int y1 = input.nextInt()-1;
-
-				System.out.println("Please pick your second X point");
-				int x2 = input.nextInt()-1;
-				System.out.println("Please pick your second Y point");
-				int y2 = input.nextInt()-1;
-
-				if(x1 - x2 == 0 || x2 - x1 == 0 ) {
-					if(y1 - y2 > y2 - y1) {
-						for(int i = 0; i < 5; i++) {
-							board[y2 + i][x1] = "+ ";
-						}
-					}
-					else if(y2 - y1 > y1 - y2) {
-						for(int i = 4; i >= 0; i--) {
-							board[y1 + i][x1] = "+ ";
-						}
-					}
+			ships = placeShip(placenum, input, board);
+			x = true;
+			for(String ship: ships) {
+				if(ship != "") {
+					x = false;
+					break;
 				}
-				else if(y1 - y2 == 0 || y2 - y1 == 0) {
-					if(x1 - x2 > x2 - x1) {
-						for(int i = 0; i < 5; i++) {
-							board[y1][x2 + i] = "+ ";
-						}
-					}
-					else if(x2 - x1 > x1 - x2) {
-						for(int i = 4; i >= 0; i--) {
-							board[y1][x1 + i] = "+ ";
-						}
-					}
-				}
-
-				else {
-					System.out.println("please try again");
-				}
-				boardPrint(board);
-				lockShip5 = true;
-				System.out.println("Ship 5 has been placed.");
 			}
-			else if(placenum.equals("4") && lockShip4 == false) {
-				System.out.println("Please pick your first X point");
-				int x1 = input.nextInt()-1;
-				System.out.println("Please pick your first Y point");
-				int y1 = input.nextInt()-1;
-
-				System.out.println("Please pick your second X point");
-				int x2 = input.nextInt()-1;
-				System.out.println("Please pick your second Y point");
-				int y2 = input.nextInt()-1;
-
-				if(x1 - x2 == 0 || x2 - x1 == 0 ) {
-					if(y1 - y2 > y2 - y1) {
-						for(int i = 0; i < 4; i++) {
-							board[y2 + i][x1] = "+ ";
-						}
-					}
-					else if(y2 - y1 > y1 - y2) {
-						for(int i = 3; i >= 0; i--) {
-							board[y1 + i][x1] = "+ ";
-						}
-					}
-				}
-				else if(y1 - y2 == 0 || y2 - y1 == 0) {
-					if(x1 - x2 > x2 - x1) {
-						for(int i = 0; i < 4; i++) {
-							board[y1][x2 + i] = "+ ";
-						}
-					}
-					else if(x2 - x1 > x1 - x2) {
-						for(int i = 3; i >= 0; i--) {
-							board[y1][x1 + i] = "+ ";
-						}
-					}
-
-
-				}
-				else {
-					System.out.println("please try again");
-				}
-				boardPrint(board);
-				lockShip4 = true;
-				System.out.println("Ship 4 has been placed.");
-			}
-			else if(placenum.equals("3c") && lockShip3c == false) {
-				System.out.println("Please pick your first X point");
-				int x1 = input.nextInt()-1;
-				System.out.println("Please pick your first Y point");
-				int y1 = input.nextInt()-1;
-
-				System.out.println("Please pick your second X point");
-				int x2 = input.nextInt()-1;
-				System.out.println("Please pick your second Y point");
-				int y2 = input.nextInt()-1;
-
-				if(x1 - x2 == 0 || x2 - x1 == 0 ) {
-					if(y1 - y2 > y2 - y1) {
-						for(int i = 0; i < 3; i++) {
-							board[y2 + i][x1] = "+ ";
-						}
-					}
-					else if(y2 - y1 > y1 - y2) {
-						for(int i = 2; i >= 0; i--) {
-							board[y1 + i][x1] = "+ ";
-						}
-					}
-				}
-				else if(y1 - y2 == 0 || y2 - y1 == 0) {
-					if(x1 - x2 > x2 - x1) {
-						for(int i = 0; i < 3; i++) {
-							board[y1][x2 + i] = "+ ";
-						}
-					}
-					else if(x2 - x1 > x1 - x2) {
-						for(int i = 2; i >= 0; i--) {
-							board[y1][x1 + i] = "+ ";
-						}
-					}
-
-
-				}
-				else {
-					System.out.println("please try again");
-				}
-				boardPrint(board);
-				lockShip3c = true;
-				System.out.println("Ship 3c has been placed.");
-			}
-			else if(placenum.equals("3s") && lockShip3s == false) {
-				System.out.println("Please pick your first X point");
-				int x1 = input.nextInt()-1;
-				System.out.println("Please pick your first Y point");
-				int y1 = input.nextInt()-1;
-
-				System.out.println("Please pick your second X point");
-				int x2 = input.nextInt()-1;
-				System.out.println("Please pick your second Y point");
-				int y2 = input.nextInt()-1;
-
-				if(x1 - x2 == 0 || x2 - x1 == 0 ) {
-					if(y1 - y2 > y2 - y1) {
-						for(int i = 0; i < 3; i++) {
-							board[y2 + i][x1] = "+ ";
-						}
-					}
-					else if(y2 - y1 > y1 - y2) {
-						for(int i = 2; i >= 0; i--) {
-							board[y1 + i][x1] = "+ ";
-						}
-					}
-				}
-				else if(y1 - y2 == 0 || y2 - y1 == 0) {
-					if(x1 - x2 > x2 - x1) {
-						for(int i = 0; i < 3; i++) {
-							board[y1][x2 + i] = "+ ";
-						}
-					}
-					else if(x2 - x1 > x1 - x2) {
-						for(int i = 2; i >= 0; i--) {
-							board[y1][x1 + i] = "+ ";
-						}
-					}
-
-
-				}
-				else {
-					System.out.println("please try again");
-				}
-				boardPrint(board);
-				lockShip3s = true;
-				System.out.println("Ship 3c has been placed.");
-			}
-			else if(placenum.equals("2") && lockShip2 == false) {
-				System.out.println("Please pick your first X point");
-				int x1 = input.nextInt()-1;
-				System.out.println("Please pick your first Y point");
-				int y1 = input.nextInt()-1;
-
-				System.out.println("Please pick your second X point");
-				int x2 = input.nextInt()-1;
-				System.out.println("Please pick your second Y point");
-				int y2 = input.nextInt()-1;
-
-				if(x1 - x2 == 0 || x2 - x1 == 0 ) {
-					if(y1 - y2 > y2 - y1) {
-						for(int i = 0; i < 2; i++) {
-							board[y2 + i][x1] = "+ ";
-						}
-					}
-					else if(y2 - y1 > y1 - y2) {
-						for(int i = 1; i >= 0; i--) {
-							board[y1 + i][x1] = "+ ";
-						}
-					}
-				}
-				else if(y1 - y2 == 0 || y2 - y1 == 0) {
-					if(x1 - x2 > x2 - x1) {
-						for(int i = 0; i < 2; i++) {
-							board[y1][x2 + i] = "+ ";
-						}
-					}
-					else if(x2 - x1 > x1 - x2) {
-						for(int i = 1; i >= 0; i--) {
-							board[y1][x1 + i] = "+ ";
-						}
-					}
-				}
-				else {
-					System.out.println("please try again");
-				}
-				boardPrint(board);
-				lockShip2 = true;
-				System.out.println("Ship 2 has been placed.");
-			}
-			if(lockShip5 == true && lockShip4 == true && lockShip3s == true && lockShip3c == true && lockShip2 == true) {
-				x = true;
+			if(x) {
 				System.out.println("ships placed");
 			}
-		
 		}
 	}
 	public static void shipdestroy(String [][] board) {
@@ -275,7 +118,7 @@ public class Battleship {
 		int destroyX = input.nextInt()-1;
 		System.out.println("Select your Y point");
 		int destroyY = input.nextInt()-1;
-		if(board)
+		input.close();
 	}
 
 	//point selection
