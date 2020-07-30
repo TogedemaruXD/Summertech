@@ -18,8 +18,10 @@ public class Battleship {
 		boolean x = false;
 		while(x != true) {
 			boardPrint(p1a);
+			System.out.println();
 			shipDestroy(p1,p2a);
 			boardPrint(p2a);
+			System.out.println();
 			shipDestroy(p2,p1a);
 			victory(p1,p2);
 			if(victory(p1,p2) == true) {
@@ -284,7 +286,7 @@ public class Battleship {
 		int destroyX = input.nextInt()-1;
 		System.out.println("Select your Y point");
 		int destroyY = input.nextInt()-1;
-		if(board[destroyX][destroyY].equals("*")) {
+		if(board[destroyX][destroyY].equals("* ")) {
 			System.out.println("Miss!");
 			board[destroyX][destroyY] = "O ";
 			boardA[destroyX][destroyY] = "O ";
@@ -299,24 +301,15 @@ public class Battleship {
 	public static boolean victory(String [][] board, String [][] board2) {
 		for(int i = 0; i < 10; i++){
 			for(int j = 0; j < 10; j++) {
-				if(!board[i][j].equals("+ ") || !board2[i][j].equals("+ ")){
-					System.out.println("game over");
-					return true;
+				if(board[i][j].equals("+ ") || board2[i][j].equals("+ ")){
+
+					return false;
 				}
 			}
 		}
-		return false;
+		System.out.println("game over");
+		return true;
 	}
-	//point selection
-	/*System.out.println("Please pick your first X point");
-		int x1 = input.nextInt();
-		System.out.println("Please pick your first Y point");
-		int y1 = input.nextInt();
-
-		System.out.println("Please pick your second X point");
-		int x2 = input.nextInt();
-		System.out.println("Please pick your second Y point");
-		int y2 = input.nextInt(); */
 }
 
 
