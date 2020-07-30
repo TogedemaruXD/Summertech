@@ -102,6 +102,7 @@ public class ticTacToe {
 				player = "x";
 			}
 		}
+		input.close();
 	}
 
 	public static void boardPrint(String [][] board) {

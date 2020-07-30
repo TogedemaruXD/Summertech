@@ -3,9 +3,9 @@ public class EvenFiboNumbers4Million {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int numbers = 0;
+		int numbers;
 		for(int i = 0; i < 4000001; i++){
-			numbers += i;
+			numbers = i;
 			System.out.println(fib(i));
 		}
 	}

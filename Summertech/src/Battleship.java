@@ -275,7 +275,7 @@ public class Battleship {
 				x = true;
 				System.out.println("ships placed");
 			}
-
+			input.close();
 		}
 	}
 	public static void shipDestroy(String [][] board, String [][] boardA) {
@@ -297,6 +297,7 @@ public class Battleship {
 			boardA[destroyX][destroyY] = "X ";
 		}
 		boardPrint(boardA);
+		input.close();
 	}
 	public static boolean victory(String [][] board, String [][] board2) {
 		for(int i = 0; i < 10; i++){
